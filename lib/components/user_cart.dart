@@ -121,6 +121,7 @@ class UserCard extends StatelessWidget {
             ),
             child: const Icon(Icons.update),
             onPressed: () {
+              userProvider.isHideContainer = true;
               userProvider
                   .updateUserCompletionsProvider(userList.id.toString());
             },
