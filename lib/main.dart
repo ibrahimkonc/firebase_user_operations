@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_user_operations/providers/login_register_provider.dart';
+import 'package:firebase_user_operations/providers/users_provider.dart';
 import 'package:firebase_user_operations/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,9 +11,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MultiProvider(
     providers: [
-      ListenableProvider(
-        create: (_) => LoginRegisterProvider(),
-      ),
+      ListenableProvider(create: (_) => UsersProvider()),
     ],
     child: const MyApp(),
   ));

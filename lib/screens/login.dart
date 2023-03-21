@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_user_operations/screens/register.dart';
+import 'package:firebase_user_operations/screens/users.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -57,7 +57,13 @@ class _LoginPageState extends State<LoginPage> {
                         await auth.signInWithEmailAndPassword(
                             email: usernameController.text,
                             password: passwordController.text);
-                    print(credential);
+                    //print(credential);
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UsersPage()));
                   } catch (e) {
                     print(e.toString());
                   }
