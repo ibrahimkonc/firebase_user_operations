@@ -10,11 +10,16 @@ class UsersProvider with ChangeNotifier {
   Services service = Services();
   bool isAdd = true;
   int countUser = 0;
+  bool isHideContainer = false;
 
   final TextEditingController userName = TextEditingController();
   final TextEditingController userEmail = TextEditingController();
   final TextEditingController userAge = TextEditingController();
   final TextEditingController userImage = TextEditingController();
+
+  void isHideContainerOptions() {
+    isHideContainer = !isHideContainer;
+  }
 
   void getUserProvider() async {
     userImage.text = "https://picsum.photos/200/300";

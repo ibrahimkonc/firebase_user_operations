@@ -45,26 +45,39 @@ class UsersPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 10),
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
+              ElevatedButton(
+                onPressed: () {
+                  userProvider.isHideContainerOptions();
+                },
+                child: const Text(
+                  "Kullanıcı Ekle",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
+              ),
+              AnimatedContainer(
+                duration: Duration(milliseconds: 250),
+                decoration: userProvider.isHideContainer
+                    ? BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 255, 255, 255)
+                                .withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
+                          ),
+                        ],
+                      )
+                    : null,
                 padding: const EdgeInsets.all(15),
-                height: 350,
+                height: userProvider.isHideContainer ? 350 : 0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -79,11 +79,29 @@ class _RegisterPageState extends State<RegisterPage> {
                           await auth.createUserWithEmailAndPassword(
                               email: usernameController.text,
                               password: passwordController.text);
-                      print(credential);
+                      //print(credential);
+
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Row(
+                          children: const [
+                            Icon(Icons.check, color: Colors.white),
+                            Text(' Kullanıcı kayıt edildi.'),
+                          ],
+                        ),
+                      ));
                     } catch (e) {
                       print(e.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Row(
+                          children: const [
+                            Icon(Icons.error, color: Colors.white),
+                            Text(" Hata !!!"),
+                          ],
+                        ),
+                      ));
                     }
-                  }, "register"),
+                  }, "Kayıt", Colors.blueAccent, Colors.white),
                   _button(() {
                     Navigator.push(
                         context,
@@ -104,7 +122,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             );
                           },
                         ));
-                  }, "Login")
+                  }, "Giriş Yap", Colors.white, Colors.blueAccent)
                 ],
               ),
             ),
@@ -119,8 +137,15 @@ class _RegisterPageState extends State<RegisterPage> {
         controller: controller,
         decoration: InputDecoration(labelText: label),
       );
-
-  Widget _button(Function() onPressed, String text) {
-    return ElevatedButton(onPressed: onPressed, child: Text(text));
+  Widget _button(
+      Function() onPressed, String text, Color bgColor, Color fgColor) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: bgColor,
+        foregroundColor: fgColor,
+      ),
+    );
   }
 }

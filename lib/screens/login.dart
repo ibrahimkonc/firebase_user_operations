@@ -81,6 +81,15 @@ class _LoginPageState extends State<LoginPage> {
                               password: passwordController.text);
                       //print(credential);
 
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Row(
+                          children: const [
+                            Icon(Icons.check, color: Colors.green),
+                            Text(' Giriş Başarılı.'),
+                          ],
+                        ),
+                      ));
+
                       // ignore: use_build_context_synchronously
                       Navigator.pushReplacement(
                           context,
@@ -88,8 +97,16 @@ class _LoginPageState extends State<LoginPage> {
                               builder: (context) => const UsersPage()));
                     } catch (e) {
                       print(e.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Row(
+                          children: const [
+                            Icon(Icons.check, color: Colors.white),
+                            Text(' Giriş Başarısız. Tekrar deneyiniz'),
+                          ],
+                        ),
+                      ));
                     }
-                  }, "Login"),
+                  }, "Giriş", Colors.blueAccent, Colors.white),
                   _button(() {
                     Navigator.push(
                         context,
@@ -110,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           },
                         ));
-                  }, "Register")
+                  }, "Kayıt Ol", Colors.white, Colors.blueAccent)
                 ],
               ),
             ),
@@ -126,7 +143,15 @@ class _LoginPageState extends State<LoginPage> {
         decoration: InputDecoration(labelText: label),
       );
 
-  Widget _button(Function() onPressed, String text) {
-    return ElevatedButton(onPressed: onPressed, child: Text(text));
+  Widget _button(
+      Function() onPressed, String text, Color bgColor, Color fgColor) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: bgColor,
+        foregroundColor: fgColor,
+      ),
+    );
   }
 }

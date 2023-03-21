@@ -14,95 +14,97 @@ class UserCard extends StatelessWidget {
 
     return Stack(
       children: [
-        Container(
-          decoration: _boxDecoration,
-          margin: const EdgeInsets.all(10.0),
-          //color: const Color(0xFF2F2C7F),
+        FittedBox(
           child: Container(
-            height: 115.0,
-            margin: const EdgeInsets.fromLTRB(1.0, 15.0, 1.0, 1.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Material(
-                          shape: const CircleBorder(side: BorderSide.none),
-                          elevation: 15,
-                          child: CircleAvatar(
-                            backgroundImage: userList.image.isEmpty
-                                ? null
-                                : NetworkImage(userList.image.toString()),
-                            radius: 32,
+            decoration: _boxDecoration,
+            margin: const EdgeInsets.all(10.0),
+            //color: const Color(0xFF2F2C7F),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.135,
+              margin: const EdgeInsets.fromLTRB(1.0, 15.0, 1.0, 1.0),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Material(
+                            shape: const CircleBorder(side: BorderSide.none),
+                            elevation: 15,
+                            child: CircleAvatar(
+                              backgroundImage: userList.image.isEmpty
+                                  ? null
+                                  : NetworkImage(userList.image.toString()),
+                              radius: 32,
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 18),
-                        color: Color.fromARGB(42, 158, 158, 158),
-                        width: 2,
-                        height: 85,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  "Kullanıcı Adı: ",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  userList.name.toString(),
-                                  style: const TextStyle(fontSize: 15.0),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Text(
-                                  "Email: ",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  userList.email.toString(),
-                                  style: const TextStyle(fontSize: 15.0),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Text(
-                                  "Yaşı: ",
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  userList.age.toString(),
-                                  style: const TextStyle(fontSize: 15.0),
-                                ),
-                              ],
-                            ),
-                          ],
+                        Container(
+                          margin: EdgeInsets.only(left: 18),
+                          color: Color.fromARGB(42, 158, 158, 158),
+                          width: 2,
+                          height: 85,
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Kullanıcı Adı: ",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    userList.name.toString(),
+                                    style: const TextStyle(fontSize: 15.0),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Email: ",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    userList.email.toString(),
+                                    style: const TextStyle(fontSize: 15.0),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Yaşı: ",
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    userList.age.toString(),
+                                    style: const TextStyle(fontSize: 15.0),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
