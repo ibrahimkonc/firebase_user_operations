@@ -66,14 +66,23 @@ class UsersPage extends StatelessWidget {
                           bool response = await userProvider.addUserProvider();
                           if (response) {
                             userProvider.clearInput(context);
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Kullanıcı Eklendi'),
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Row(
+                                children: const [
+                                  Icon(Icons.check, color: Colors.white),
+                                  Text(' Kullanıcı Eklendi')
+                                ],
+                              ),
                             ));
                           } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Lütfen Boş Bırakmayınız / Hata !'),
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Row(
+                                children: const [
+                                  Icon(Icons.disabled_by_default_outlined,
+                                      color: Colors.white),
+                                  Text(' Lütfen Boş Bırakmayınız / Hata !'),
+                                ],
+                              ),
                             ));
                           }
                         }, "Kullanıcı Ekle", context, Icons.add_box_outlined,
@@ -84,14 +93,24 @@ class UsersPage extends StatelessWidget {
                           if (response) {
                             userProvider.clearInput(context);
 
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Kullanıcı Güncellendi'),
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Row(
+                                children: const [
+                                  Icon(Icons.update_outlined,
+                                      color: Colors.white),
+                                  Text(' Kullanıcı Güncellendi'),
+                                ],
+                              ),
                             ));
                           } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Lütfen Boş Bırakmayınız / Hata !'),
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Row(
+                                children: const [
+                                  Icon(Icons.disabled_by_default_outlined,
+                                      color: Colors.white),
+                                  Text(' Lütfen Boş Bırakmayınız / Hata !'),
+                                ],
+                              ),
                             ));
                           }
                         }, "Kullanıcı Güncelle", context,
@@ -100,18 +119,18 @@ class UsersPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 15),
+              margin: const EdgeInsets.symmetric(vertical: 15),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.8),
                     spreadRadius: 2,
                     blurRadius: 7,
-                    offset: Offset(0, 6), // changes position of shadow
+                    offset: const Offset(0, 6), // changes position of shadow
                   ),
                 ],
               ),
-              child: Divider(
+              child: const Divider(
                 height: 0,
                 indent: 15,
                 endIndent: 15,
@@ -120,14 +139,16 @@ class UsersPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                children: userProvider.userList
-                    .map((e) => UserCard(userList: e))
-                    .toList()
-                    .reversed
-                    .toList(),
-              ),
+              child: userProvider.userList.isEmpty
+                  ? const Text("Kayıt Bulunamamıştır")
+                  : ListView(
+                      physics: const BouncingScrollPhysics(),
+                      children: userProvider.userList
+                          .map((e) => UserCard(userList: e))
+                          .toList()
+                          .reversed
+                          .toList(),
+                    ),
             ),
           ],
         ),

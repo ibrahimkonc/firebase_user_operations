@@ -30,18 +30,22 @@ class UserCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(2.0),
-                        child: CircleAvatar(
-                          backgroundImage: userList.image.isEmpty
-                              ? null
-                              : NetworkImage(userList.image.toString()),
-                          radius: 32,
+                        child: Material(
+                          shape: const CircleBorder(side: BorderSide.none),
+                          elevation: 15,
+                          child: CircleAvatar(
+                            backgroundImage: userList.image.isEmpty
+                                ? null
+                                : NetworkImage(userList.image.toString()),
+                            radius: 32,
+                          ),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.only(left: 18),
-                        decoration: _boxDecoration,
-                        width: 0.2,
-                        height: 80,
+                        color: Color.fromARGB(42, 158, 158, 158),
+                        width: 2,
+                        height: 85,
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -106,7 +110,13 @@ class UserCard extends StatelessWidget {
         Align(
           alignment: Alignment.topLeft,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueAccent,
+              elevation: 8,
+              shadowColor: Colors.blueAccent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0)),
+            ),
             child: const Icon(Icons.update),
             onPressed: () {
               userProvider
@@ -117,10 +127,50 @@ class UserCard extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.redAccent,
+              elevation: 8,
+              shadowColor: Colors.redAccent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0)),
+            ),
             child: const Icon(Icons.delete),
             onPressed: () {
-              userProvider.deleteUserProvider(userList.id.toString());
+              showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Row(
+                        children: const [
+                          Icon(Icons.error_outline),
+                          Text(' Onay Mesajı'),
+                        ],
+                      ),
+                      content: const Text('Kullanıcı Silinsin mi ?'),
+                      actions: <Widget>[
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Evet'),
+                          onPressed: () {
+                            userProvider
+                                .deleteUserProvider(userList.id.toString());
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          child: const Text('Hayır'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  });
             },
           ),
         ),

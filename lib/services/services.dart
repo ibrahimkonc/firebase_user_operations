@@ -19,10 +19,12 @@ class Services {
     List<UserModel> list = [];
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
-      for (var key in data.keys) {
-        UserModel user = UserModel.fromMap(data[key]);
-        user.id = key;
-        list.add(user);
+      if (data != null) {
+        for (var key in data.keys) {
+          UserModel user = UserModel.fromMap(data[key]);
+          user.id = key;
+          list.add(user);
+        }
       }
     }
     return list;

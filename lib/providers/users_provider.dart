@@ -17,6 +17,7 @@ class UsersProvider with ChangeNotifier {
 
   void getUserProvider() async {
     userImage.text = "https://picsum.photos/200/300";
+    
     userList = await service.getUsers();
     notifyListeners();
   }
