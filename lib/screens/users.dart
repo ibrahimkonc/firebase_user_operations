@@ -22,8 +22,20 @@ class UsersPage extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
               ),
               padding: const EdgeInsets.all(15),
               height: 350,
@@ -38,13 +50,13 @@ class UsersPage extends StatelessWidget {
                         color: Color(0xFF2F2C7F)),
                   ),
                   const SizedBox(height: 20),
-                  _textfiled(userProvider.userName, "Kullanıcı Adı Soyadı",
+                  _textfield(userProvider.userName, "Kullanıcı Adı Soyadı",
                       Icons.person_add_alt, TextInputType.text),
-                  _textfiled(userProvider.userEmail, "Email",
+                  _textfield(userProvider.userEmail, "Email",
                       Icons.mail_outline, TextInputType.text),
-                  _textfiled(userProvider.userAge, "Yaşınız",
+                  _textfield(userProvider.userAge, "Yaşınız",
                       Icons.align_vertical_bottom_sharp, TextInputType.number),
-                  _textfiled(
+                  _textfield(
                       userProvider.userImage,
                       "Resim http://www.image.com",
                       Icons.image_outlined,
@@ -87,7 +99,26 @@ class UsersPage extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(color: Color(0xFF2F2C7F), height: 30),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 15),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.8),
+                    spreadRadius: 2,
+                    blurRadius: 7,
+                    offset: Offset(0, 6), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Divider(
+                height: 0,
+                indent: 15,
+                endIndent: 15,
+                thickness: 0,
+                color: Colors.grey,
+              ),
+            ),
             Expanded(
               child: ListView(
                 physics: const BouncingScrollPhysics(),
@@ -104,7 +135,7 @@ class UsersPage extends StatelessWidget {
     );
   }
 
-  Widget _textfiled(TextEditingController controller, String label,
+  Widget _textfield(TextEditingController controller, String label,
           IconData icon, TextInputType type) =>
       Expanded(
         child: TextField(
