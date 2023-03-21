@@ -49,14 +49,41 @@ class UsersPage extends StatelessWidget {
                       "Resim http://www.image.com",
                       Icons.image_outlined,
                       TextInputType.text),
-                  IconButton(
-                    onPressed: () {
-                      userProvider.addUserProvider();
-                    },
-                    icon: const Icon(Icons.add_box_outlined),
-                    color: const Color(0xFF2F2C7F),
-                    iconSize: 35.0,
-                  )
+                  userProvider.userID.isEmpty
+                      ? _button(() async {
+                          bool response = await userProvider.addUserProvider();
+                          if (response) {
+                            userProvider.clearInput(context);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Kullanıcı Eklendi'),
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Lütfen Boş Bırakmayınız / Hata !'),
+                            ));
+                          }
+                        }, "Kullanıcı Ekle", context, Icons.add_box_outlined,
+                          const Color(0xFF2F2C7F))
+                      : _button(() async {
+                          bool response =
+                              await userProvider.updateUserProvider();
+                          if (response) {
+                            userProvider.clearInput(context);
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Kullanıcı Güncellendi'),
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Lütfen Boş Bırakmayınız / Hata !'),
+                            ));
+                          }
+                        }, "Kullanıcı Güncelle", context,
+                          Icons.file_upload_outlined, Colors.blueAccent),
                 ],
               ),
             ),
@@ -82,10 +109,11 @@ class UsersPage extends StatelessWidget {
       Expanded(
         child: TextField(
           keyboardType: type,
-          style: TextStyle(fontSize: 14, height: 2.0, color: Colors.black),
+          style:
+              const TextStyle(fontSize: 14, height: 2.0, color: Colors.black),
           controller: controller,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0.0),
+            contentPadding: const EdgeInsets.all(0.0),
             prefixIcon: Align(
               widthFactor: 1.0,
               heightFactor: 1.0,
@@ -96,4 +124,16 @@ class UsersPage extends StatelessWidget {
           ),
         ),
       );
+
+  Widget _button(Function() onPressed, String text, BuildContext context,
+      IconData icon, Color color) {
+    return IconButton(
+      tooltip: text,
+      onPressed: onPressed,
+      icon: Icon(icon),
+      color: color,
+      iconSize: 35.0,
+    );
+    // ElevatedButton(onPressed: onPressed, child: Text(text));
+  }
 }

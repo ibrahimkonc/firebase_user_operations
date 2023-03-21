@@ -103,7 +103,8 @@ class UserCard extends StatelessWidget {
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
             child: const Icon(Icons.update),
             onPressed: () {
-              userProvider.deleteUserProvider(userList.id.toString());
+              userProvider
+                  .updateUserCompletionsProvider(userList.id.toString());
             },
           ),
         ),
